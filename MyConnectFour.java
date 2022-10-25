@@ -36,7 +36,7 @@ public class MyConnectFour {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j] == 'r') {
                         count = count + 1;
-                        if (count > 4) {
+                        if (count >= 4) { // change to >=
                             hasWon = true;
                         }
                     } else {
@@ -51,7 +51,7 @@ public class MyConnectFour {
                 for (int j = 0; j < board.length; j++) {
                     if (board[j][i] == 'r') {
                         count = count + 1;
-                        if (count > 4) {
+                        if (count >= 4) { // change to >=
                             hasWon = true;
                         }
                     } else {
@@ -60,9 +60,13 @@ public class MyConnectFour {
                 }
 
             }
+
+            // TODO check diagonals left and right
+
             printBoard();
             if (hasWon) {
                 win = true;
+                System.out.println("You Have Won!!!"); // move to inside if statement
             } else {
                 // player 2
                 userInput = getUserInput();
@@ -79,6 +83,7 @@ public class MyConnectFour {
                                 hasWon = true;
                             }
                         } else {
+                            count = 0;
 
                         }
                     }
@@ -94,17 +99,21 @@ public class MyConnectFour {
                                 hasWon = true;
                             }
                         } else {
-
+                            count = 0;
                         }
                     }
                     count = 0;
                 }
+
+                // TODO check diagonals left and right
+
                 printBoard();
                 if (hasWon) {
                     win = true;
+                    System.out.println("You Have Won!!!"); // move to inside if statement
                 }
             }
-            System.out.println("You Have Won!!!");
+
         }
 
     }
@@ -120,7 +129,7 @@ public class MyConnectFour {
     }
 
     private void printBoard() {
-        for (int i = 0; i < board.length - 1; i++)
+        for (int i = 0; i < board.length; i++) // removed -1 to print full board
 
         {
             for (int j = 0; j < board[i].length; j++) { // removed -1 to print full board
@@ -142,10 +151,10 @@ public class MyConnectFour {
         if (player == 'r') {
             for (int i = board.length - 1; i >= 0; i--) { // changed this to decrement. TODO check this
                 if (!placed) {
-                    if (board[i - 1][position - 1] == 'y') {
+                    if (board[i][position - 1] == 'y') {
                         // skip
-                    } else if (board[i - 1][position - 1] != 'r') {
-                        board[i - 1][position - 1] = 'r';
+                    } else if (board[i][position - 1] != 'r') {
+                        board[i][position - 1] = 'r';
                         System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
@@ -154,10 +163,10 @@ public class MyConnectFour {
         } else {
             for (int i = board.length - 1; i >= 0; i--) {
                 if (!placed) {
-                    if (board[i - 1][position - 1] == 'r') {
+                    if (board[i][position - 1] == 'r') {
                         // skip
-                    } else if (board[i - 1][position - 1] != 'y') {
-                        board[i - 1][position - 1] = 'y';
+                    } else if (board[i][position - 1] != 'y') {
+                        board[i][position - 1] = 'y';
                         System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
