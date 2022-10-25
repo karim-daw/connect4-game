@@ -22,6 +22,7 @@ public class MyConnectFour {
         System.out.println("A player wins by connecting 4 counters in a row - vertically, horizontally or diagonally");
         System.out.println("");
         printBoard();
+
         boolean win = false;
         while (!win) {
             // player 1
@@ -122,10 +123,10 @@ public class MyConnectFour {
         for (int i = 0; i < board.length - 1; i++)
 
         {
-            for (int j = 0; j < board[i].length - 1; j++) {
-                if (board[j][i] == 'r') {
+            for (int j = 0; j < board[i].length; j++) { // removed -1 to print full board
+                if (board[i][j] == 'r') { // switched iterators
                     System.out.print("| r ");
-                } else if (board[j][i] == 'y') {
+                } else if (board[i][j] == 'y') { // switched iterators
                     System.out.print("| y ");
                 } else {
                     System.out.print("|   ");
@@ -139,12 +140,13 @@ public class MyConnectFour {
     private void placeCounter(char player, int position) {
         boolean placed = false;
         if (player == 'r') {
-            for (int i = board.length - 1; i >= 0; i++) {
+            for (int i = board.length - 1; i >= 0; i--) { // changed this to decrement. TODO check this
                 if (!placed) {
-                    if (board[i][position] == 'y') {
+                    if (board[i - 1][position - 1] == 'y') {
                         // skip
-                    } else if (board[i][position] != 'r') {
-                        board[i][position] = 'r';
+                    } else if (board[i - 1][position - 1] != 'r') {
+                        board[i - 1][position - 1] = 'r';
+                        System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
                 }
@@ -152,10 +154,11 @@ public class MyConnectFour {
         } else {
             for (int i = board.length - 1; i >= 0; i--) {
                 if (!placed) {
-                    if (board[i][position - 1] == 'r') {
+                    if (board[i - 1][position - 1] == 'r') {
                         // skip
-                    } else if (board[i][position - 1] != 'y') {
-                        board[i][position - 1] = 'y';
+                    } else if (board[i - 1][position - 1] != 'y') {
+                        board[i - 1][position - 1] = 'y';
+                        System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
                 }
