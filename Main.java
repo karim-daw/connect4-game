@@ -1,5 +1,6 @@
 class Main {
     public static void main(String[] args) {
-        new MyConnectFour();
+        GameLogic game = new GameLogic();
+        game.displayBoard();
     }
 }

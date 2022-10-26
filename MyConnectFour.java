@@ -88,14 +88,9 @@ public class MyConnectFour {
                         count = 0;
                         // mover = 0;
                     }
-
                 }
             }
 
-            // System.out.println(count);
-            // TODO check diagonals left and right
-
-            // System.out.println(hasWon);
             printBoard();
             if (hasWon) {
                 win = true;
@@ -139,8 +134,6 @@ public class MyConnectFour {
                     count = 0;
                 }
 
-                // TODO check diagonals left and right
-
                 printBoard();
                 if (hasWon) {
                     win = true;
@@ -183,7 +176,7 @@ public class MyConnectFour {
     private void placeCounter(char player, int position) {
         boolean placed = false;
         if (player == 'r') {
-            for (int i = board.length - 1; i >= 0; i--) { // changed this to decrement. TODO check this
+            for (int i = board.length - 1; i >= 0; i--) { // changed this to decrement.
                 if (!placed) {
                     if (board[i][position - 1] == 'y') {
                         // skip
