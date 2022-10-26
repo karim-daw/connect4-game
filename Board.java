@@ -1,21 +1,18 @@
 public class Board {
 
-    private char[][] board;
+    private String[][] board;
     private static int rows;
     private static int columns;
+    private boolean win;
 
     public Board(int rows, int columns) {
         Board.rows = rows;
         Board.columns = columns;
-        board = new char[rows][columns];
+        board = new String[rows][columns];
     }
 
-    public static int getRows() {
-        return rows;
-    }
-
-    public static int getColumns() {
-        return columns;
+    public void placeToken(int row, int column, String token) {
+        board[row][column] = token;
     }
 
     public void printBoard() {
@@ -32,10 +29,10 @@ public class Board {
             }
             System.out.println("|");
         }
-        System.out.println(getColumnFooters());
+        System.out.println(getPrintableColumnFooters());
     }
 
-    public String getColumnFooters() {
+    private String getPrintableColumnFooters() {
         String footer = "";
         String space = "   ";
         String halfSpace = "  ";
@@ -51,6 +48,10 @@ public class Board {
         }
         footer += halfSpace;
         return footer;
+    }
+
+    public boolean hasWon() {
+        return win;
     }
 
 }
