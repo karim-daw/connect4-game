@@ -6,7 +6,8 @@ public class GameLogic {
         board = new Board(6, 7);
     }
 
-    public void displayBoard() {
-        board.printBoard();
+    public void startGame() {
+        Display.displayBoard(board);
     }
+
 }
