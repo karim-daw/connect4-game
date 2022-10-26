@@ -58,15 +58,49 @@ public class MyConnectFour {
                         count = 0;
                     }
                 }
-
             }
 
+            // check diagonal (down right)
+
+            for (int i = 0; i < board.length; i++) {
+                count = 0;
+                int delta = 0;
+                for (int j = i; j < board.length; j++) {
+
+                    if (board[j][delta] == 'r') {
+
+                        System.out.println("[" + (i) + "," + (j) + "]");
+                        System.out.println("[" + (i + 1) + "," + (j + 1) + "]");
+                        // System.out.println("count is " + count);
+                        // System.out.println("mover is " + mover);
+
+                        count = count + 1;
+                        delta++;
+
+                        // System.out.println(count);
+
+                        if (count >= 4) {
+                            hasWon = true;
+                        }
+
+                        System.out.println(count);
+                    } else {
+                        count = 0;
+                        // mover = 0;
+                    }
+
+                }
+            }
+
+            // System.out.println(count);
             // TODO check diagonals left and right
 
+            // System.out.println(hasWon);
             printBoard();
             if (hasWon) {
                 win = true;
                 System.out.println("You Have Won!!!"); // move to inside if statement
+
             } else {
                 // player 2
                 userInput = getUserInput();
@@ -84,11 +118,11 @@ public class MyConnectFour {
                             }
                         } else {
                             count = 0;
-
                         }
                     }
                     count = 0;
                 }
+
                 // check vertical
                 count = 0;
                 for (int i = 0; i < board[0].length; i++) {
@@ -155,7 +189,7 @@ public class MyConnectFour {
                         // skip
                     } else if (board[i][position - 1] != 'r') {
                         board[i][position - 1] = 'r';
-                        System.out.println((i - 1) + " " + (position - 1));
+                        // System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
                 }
@@ -167,7 +201,7 @@ public class MyConnectFour {
                         // skip
                     } else if (board[i][position - 1] != 'y') {
                         board[i][position - 1] = 'y';
-                        System.out.println((i - 1) + " " + (position - 1));
+                        // System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
                 }
