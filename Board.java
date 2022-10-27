@@ -39,6 +39,7 @@ public class Board {
     private void setStartingBoard() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
+                board[i][j] = new Tile(i, j);
                 board[i][j].setToken("|   ");
             }
         }
