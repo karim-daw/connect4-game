@@ -3,7 +3,7 @@ public class Board {
     private Tile[][] board;
     private static int rows;
     private static int columns;
-    private boolean win;
+    private boolean win = false;
 
     public Board(int rows, int columns) {
         Board.rows = rows;
@@ -12,10 +12,10 @@ public class Board {
         setStartingBoard();
     }
 
-    public void placeToken(int row, int column, String token) {
-        Tile tile = this.board[row][column];
-        tile.setToken(token);
-    }
+    // public void placeToken(int row, int column, Move move, String token) {
+    // Tile tile = this.board[row][column];
+    // tile.setToken(token);
+    // }
 
     public void printBoard() {
         System.out.println(getPrintableBoard());
@@ -25,9 +25,7 @@ public class Board {
         String boardString = "";
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                // Tile tile = new Tile(i, j);
                 boardString += board[i][j].getToken();
-                // boardString += "o";
             }
             boardString += "|";
             boardString += "\n";
@@ -67,10 +65,10 @@ public class Board {
         return win;
     }
 
-    public void placeCounter(Player player, Move move) {
+    public void placeToken(Player player) {
 
         // get position
-        int position = move.getColumn();
+        int position = player.getMove().getColumn();
 
         // get player token
         String playerToken = player.getToken();
@@ -85,6 +83,9 @@ public class Board {
             } else {
                 tile.setToken(playerToken);
                 tile.setToOccupied();
+
+                // put tile on board
+                board[i][position - 1] = tile;
             }
         }
 
