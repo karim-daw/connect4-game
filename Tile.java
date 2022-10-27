@@ -39,7 +39,7 @@ public class Tile {
     /**
      * Gets the symbol of the tile
      * 
-     * @return this.symbol
+     * @return this.token
      */
     public String getToken() {
         return this.token;
@@ -60,11 +60,6 @@ public class Tile {
 
     public void setToOccupied() {
         this.availabilty = false;
-    }
-
-    public String toString() {
-        String s = "[" + this.token + "]";
-        return s;
     }
 
 }
