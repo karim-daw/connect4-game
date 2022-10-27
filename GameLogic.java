@@ -11,7 +11,11 @@ public class GameLogic {
     }
 
     public void playGame() {
+        // start by showing empty board
         Display.displayBoard(board);
+
+        // play a round, whhere player 1 places token
+
     }
 
 }
