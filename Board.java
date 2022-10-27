@@ -79,13 +79,14 @@ public class Board {
 
             // check if position is occupied
             if (!tile.isAvailable()) {
-                // skip
+
             } else {
                 tile.setToken(playerToken);
                 tile.setToOccupied();
 
                 // put tile on board
                 board[i][position - 1] = tile;
+                break;
             }
         }
 

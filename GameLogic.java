@@ -7,8 +7,8 @@ public class GameLogic {
 
     public GameLogic() {
         board = new Board(6, 7);
-        player1 = new Player("R");
-        player2 = new Player("B");
+        player1 = new Player("| R ");
+        player2 = new Player("| B ");
     }
 
     public void playGame() {
@@ -17,7 +17,7 @@ public class GameLogic {
         Display.displayBoard(board);
 
         // set current player
-        Player currentPlayer = player1;
+        currentPlayer = player1;
 
         // if game hasnt won
         while (!board.hasWon()) {
@@ -28,6 +28,7 @@ public class GameLogic {
             // show state of board
             Display.displayBoard(board);
 
+            // change player
             changePlayer();
 
         }
