@@ -8,7 +8,7 @@ public class Player {
     }
 
     public Move getMove() {
-        int colNumber = new InputReader().getInput();
+        int colNumber = new InputReader().getNumberInput();
         return new Move(colNumber);
     }
 

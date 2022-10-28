@@ -5,23 +5,37 @@ import java.io.InputStreamReader;
 public class InputReader {
 
     private BufferedReader input;
+    private String userInput;
+    private int numberInput;
+
+    public int getNumberInput() {
+        getUserInput();
+        return numberInput;
+    }
 
     public InputReader() {
         input = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public int getInput() {
+    public void getUserInput() {
         try {
-            return convertToInt(input.readLine());
+            userInput = input.readLine();
+            convertToInt();
+            // return numberInput;
+
         } catch (IOException e) {
             System.out.println(e);
-            System.out.println("Error from user input, returning 0");
         }
-        return 0;
     }
 
-    private int convertToInt(String s) {
-        return Integer.parseInt(s);
+    private void convertToInt() {
+        try {
+            numberInput = Integer.parseInt(userInput);
+        } catch (NumberFormatException e) {
+            System.out.println("cannot enter non-integer number");
+            System.out.println(e);
+            numberInput = -1;
+        }
     }
 
 }

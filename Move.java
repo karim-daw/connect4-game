@@ -10,4 +10,13 @@ public class Move {
         return column;
     }
 
+    public boolean isValidMove() {
+        if (column == -1) {
+            System.out.println("Try again, this time enter an integer");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

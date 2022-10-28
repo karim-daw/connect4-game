@@ -67,55 +67,34 @@ public class Board {
 
     public void placeToken(Player player) {
 
-        // get position
-        int position = player.getMove().getColumn();
+        // get move from player and check if valid
+        Move move = player.getMove();
+        if (move.isValidMove()) {
 
-        // get player token
-        String playerToken = player.getToken();
+            // get position
+            int col = move.getColumn();
 
-        for (int i = Board.rows - 1; i >= 0; i--) {
+            // get player token
+            String playerToken = player.getToken();
 
-            Tile tile = board[i][position - 1];
+            for (int i = Board.rows - 1; i >= 0; i--) {
 
-            // check if position is occupied
-            if (!tile.isAvailable()) {
+                Tile tile = board[i][col - 1];
 
-            } else {
-                tile.setToken(playerToken);
-                tile.setToOccupied();
+                // check if position is occupied
+                if (!tile.isAvailable()) {
 
-                // put tile on board
-                board[i][position - 1] = tile;
-                break;
+                } else {
+                    tile.setToken(playerToken);
+                    tile.setToOccupied();
+
+                    // put tile on board
+                    board[i][col - 1] = tile;
+                    break;
+                }
             }
         }
 
-        // boolean placed = false;
-        // if (player == 'r') {
-        // for (int i = board.length - 1; i >= 0; i--) { // changed this to decrement.
-        // if (!placed) {
-        // if (board[i][position - 1] == 'y') {
-        // // skip
-        // } else if (board[i][position - 1] != 'r') {
-        // board[i][position - 1] = 'r';
-        // // System.out.println((i - 1) + " " + (position - 1));
-        // placed = true;
-        // }
-        // }
-        // }
-        // } else {
-        // for (int i = board.length - 1; i >= 0; i--) {
-        // if (!placed) {
-        // if (board[i][position - 1] == 'r') {
-        // // skip
-        // } else if (board[i][position - 1] != 'y') {
-        // board[i][position - 1] = 'y';
-        // // System.out.println((i - 1) + " " + (position - 1));
-        // placed = true;
-        // }
-        // }
-        // }
-        // }
     }
 
 }
