@@ -12,16 +12,7 @@ public class Board {
         setStartingBoard();
     }
 
-    // public void placeToken(int row, int column, Move move, String token) {
-    // Tile tile = this.board[row][column];
-    // tile.setToken(token);
-    // }
-
-    public void printBoard() {
-        System.out.println(getPrintableBoard());
-    }
-
-    private String getPrintableBoard() {
+    public String getPrintableBoard() {
         String boardString = "";
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {

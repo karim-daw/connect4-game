@@ -5,7 +5,7 @@ public class Display {
     }
 
     public static void displayBoard(Board board) {
-        board.printBoard();
+        System.out.println(board.getPrintableBoard());
     }
 
 }
