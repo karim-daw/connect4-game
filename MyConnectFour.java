@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+// testing branch
+
 public class MyConnectFour {
 
     private BufferedReader input;
@@ -20,6 +22,7 @@ public class MyConnectFour {
         System.out.println("A player wins by connecting 4 counters in a row - vertically, horizontally or diagonally");
         System.out.println("");
         printBoard();
+
         boolean win = false;
         while (!win) {
             // player 1
@@ -33,7 +36,7 @@ public class MyConnectFour {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j] == 'r') {
                         count = count + 1;
-                        if (count > 4) {
+                        if (count >= 4) { // change to >=
                             hasWon = true;
                         }
                     } else {
@@ -48,18 +51,51 @@ public class MyConnectFour {
                 for (int j = 0; j < board.length; j++) {
                     if (board[j][i] == 'r') {
                         count = count + 1;
-                        if (count > 4) {
+                        if (count >= 4) { // change to >=
                             hasWon = true;
                         }
                     } else {
                         count = 0;
                     }
                 }
-
             }
+
+            // check diagonal (down right)
+
+            for (int i = 0; i < board.length; i++) {
+                count = 0;
+                int delta = 0;
+                for (int j = i; j < board.length; j++) {
+
+                    if (board[j][delta] == 'r') {
+
+                        System.out.println("[" + (i) + "," + (j) + "]");
+                        System.out.println("[" + (i + 1) + "," + (j + 1) + "]");
+                        // System.out.println("count is " + count);
+                        // System.out.println("mover is " + mover);
+
+                        count = count + 1;
+                        delta++;
+
+                        // System.out.println(count);
+
+                        if (count >= 4) {
+                            hasWon = true;
+                        }
+
+                        System.out.println(count);
+                    } else {
+                        count = 0;
+                        // mover = 0;
+                    }
+                }
+            }
+
             printBoard();
             if (hasWon) {
                 win = true;
+                System.out.println("You Have Won!!!"); // move to inside if statement
+
             } else {
                 // player 2
                 userInput = getUserInput();
@@ -76,11 +112,12 @@ public class MyConnectFour {
                                 hasWon = true;
                             }
                         } else {
-
+                            count = 0;
                         }
                     }
                     count = 0;
                 }
+
                 // check vertical
                 count = 0;
                 for (int i = 0; i < board[0].length; i++) {
@@ -91,17 +128,19 @@ public class MyConnectFour {
                                 hasWon = true;
                             }
                         } else {
-
+                            count = 0;
                         }
                     }
                     count = 0;
                 }
+
                 printBoard();
                 if (hasWon) {
                     win = true;
+                    System.out.println("You Have Won!!!"); // move to inside if statement
                 }
             }
-            System.out.println("You Have Won!!!");
+
         }
 
     }
@@ -117,13 +156,13 @@ public class MyConnectFour {
     }
 
     private void printBoard() {
-        for (int i = 0; i < board.length - 1; i++)
+        for (int i = 0; i < board.length; i++) // removed -1 to print full board
 
         {
-            for (int j = 0; j < board[i].length - 1; j++) {
-                if (board[j][i] == 'r') {
+            for (int j = 0; j < board[i].length; j++) { // removed -1 to print full board
+                if (board[i][j] == 'r') { // switched iterators
                     System.out.print("| r ");
-                } else if (board[j][i] == 'y') {
+                } else if (board[i][j] == 'y') { // switched iterators
                     System.out.print("| y ");
                 } else {
                     System.out.print("|   ");
@@ -137,12 +176,13 @@ public class MyConnectFour {
     private void placeCounter(char player, int position) {
         boolean placed = false;
         if (player == 'r') {
-            for (int i = board.length - 1; i >= 0; i++) {
+            for (int i = board.length - 1; i >= 0; i--) { // changed this to decrement.
                 if (!placed) {
-                    if (board[i][position] == 'y') {
+                    if (board[i][position - 1] == 'y') {
                         // skip
-                    } else if (board[i][position] != 'r') {
-                        board[i][position] = 'r';
+                    } else if (board[i][position - 1] != 'r') {
+                        board[i][position - 1] = 'r';
+                        // System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
                 }
@@ -154,6 +194,7 @@ public class MyConnectFour {
                         // skip
                     } else if (board[i][position - 1] != 'y') {
                         board[i][position - 1] = 'y';
+                        // System.out.println((i - 1) + " " + (position - 1));
                         placed = true;
                     }
                 }
