@@ -21,7 +21,6 @@ public class InputReader {
         try {
             userInput = input.readLine();
             convertToInt();
-            // return numberInput;
 
         } catch (IOException e) {
             System.out.println(e);
