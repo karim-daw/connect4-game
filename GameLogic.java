@@ -4,6 +4,7 @@ public class GameLogic {
     Player player1;
     Player player2;
     Player currentPlayer;
+    Win win = new Win();
 
     public GameLogic() {
         board = new Board(6, 7);
@@ -20,7 +21,7 @@ public class GameLogic {
         currentPlayer = player1;
 
         // if game hasnt won
-        while (!board.hasWon()) {
+        while (!board.hasWin()) {
 
             // place token
             board.placeToken(currentPlayer);
@@ -28,8 +29,13 @@ public class GameLogic {
             // show state of board
             Display.displayBoard(board);
 
-            // change player
-            changePlayer();
+            // check if there is a winner
+            if (win.checkWin(currentPlayer.getToken(), board.getBoard())) {
+                board.isWin();
+            } else {
+                // change player
+                changePlayer();
+            }
 
         }
 

@@ -8,13 +8,13 @@ public class InputReader {
     private String userInput;
     private int numberInput;
 
+    public InputReader() {
+        input = new BufferedReader(new InputStreamReader(System.in));
+    }
+
     public int getNumberInput() {
         getUserInput();
         return numberInput;
-    }
-
-    public InputReader() {
-        input = new BufferedReader(new InputStreamReader(System.in));
     }
 
     public void getUserInput() {

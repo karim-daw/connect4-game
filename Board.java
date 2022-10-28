@@ -12,6 +12,18 @@ public class Board {
         setStartingBoard();
     }
 
+    public static int getRows() {
+        return rows;
+    }
+
+    public static int getColumns() {
+        return columns;
+    }
+
+    public Tile[][] getBoard() {
+        return board;
+    }
+
     public String getPrintableBoard() {
         String boardString = "";
         for (int i = 0; i < rows; i++) {
@@ -52,8 +64,12 @@ public class Board {
         return footer;
     }
 
-    public boolean hasWon() {
+    public boolean hasWin() {
         return win;
+    }
+
+    public void isWin() {
+        win = true;
     }
 
     public void placeToken(Player player) {
