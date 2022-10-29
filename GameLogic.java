@@ -49,7 +49,10 @@ public class GameLogic {
     }
 
     public void changePlayer() {
-        if (currentPlayer.equals(player1)) {
+
+        if (currentPlayer.equals(player1) &&
+                currentPlayer.getCurrentMove().isValidMove() &&
+                currentPlayer.getCurrentMove().isMoveInBounds()) {
             currentPlayer = player2;
         } else {
             currentPlayer = player1;

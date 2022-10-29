@@ -3,6 +3,7 @@ public class HumanPlayer implements Player {
 
     private String token;
     private String name;
+    Move currentMove;
 
     public HumanPlayer(String token, String name) {
         this.token = token;
@@ -11,7 +12,13 @@ public class HumanPlayer implements Player {
 
     public Move getMove() {
         int colNumber = new InputReader().getNumberInput();
-        return new Move(colNumber);
+        Move move = new Move(colNumber);
+        this.currentMove = move;
+        return move;
+    }
+
+    public Move getCurrentMove() {
+        return this.currentMove;
     }
 
     public String getToken() {

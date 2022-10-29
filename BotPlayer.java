@@ -7,6 +7,7 @@ public class BotPlayer implements Player {
     private String name;
     private Random rand;
     private Board board;
+    Move currentMove;
 
     public BotPlayer(String token, String name, Board board) {
         this.token = token;
@@ -19,6 +20,10 @@ public class BotPlayer implements Player {
     public Move getMove() {
         int colNumber = getRandomColumn();
         return new Move(colNumber);
+    }
+
+    public Move getCurrentMove() {
+        return this.currentMove;
     }
 
     public String getToken() {

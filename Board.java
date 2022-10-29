@@ -87,7 +87,7 @@ public class Board {
                 counter++;
                 if (counter == rows) {
                     isfull = true;
-                    System.out.println("Chosen column is full, pick another\n");
+                    Display.displayColumnFullWarning(col);
                 }
             }
         }
@@ -111,10 +111,11 @@ public class Board {
 
         // get move from player and check if valid
         Move move = player.getMove();
-        if (move.isValidMove() && move.isMoveInBounds()) {
 
-            // get position
-            int col = move.getColumn();
+        // get position
+        int col = move.getColumn();
+
+        if (move.isValidMove() && move.isMoveInBounds()) {
             if (!isColumnFull(col)) {
 
                 // get player token
@@ -137,6 +138,10 @@ public class Board {
                     }
                 }
             }
+        } else if (!move.isValidMove()) {
+            Display.displayInValidMoveWarning();
+        } else if (!move.isMoveInBounds()) {
+            Display.displayMoveOutOfBoundsWarning(col);
         }
     }
 
