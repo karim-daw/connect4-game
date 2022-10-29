@@ -8,11 +8,14 @@ public class GameLogic {
 
     public GameLogic() {
         board = new Board(6, 7);
-        player1 = new Player("| R ");
-        player2 = new Player("| B ");
+        player1 = new Player("| R ", "Player 1");
+        player2 = new Player("| Y ", "Player 2");
     }
 
     public void playGame() {
+
+        // show welcome message
+        Display.displayStartMessage();
 
         // show starting board
         Display.displayBoard(board);
@@ -32,6 +35,7 @@ public class GameLogic {
             // check if there is a winner
             if (win.checkWin(currentPlayer.getToken(), board.getBoard())) {
                 board.isWin();
+                Display.displayWinner(currentPlayer);
             } else {
                 // change player
                 changePlayer();

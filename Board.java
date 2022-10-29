@@ -24,6 +24,14 @@ public class Board {
         return board;
     }
 
+    public boolean hasWin() {
+        return win;
+    }
+
+    public void isWin() {
+        win = true;
+    }
+
     public String getPrintableBoard() {
         String boardString = "";
         for (int i = 0; i < rows; i++) {
@@ -64,44 +72,57 @@ public class Board {
         return footer;
     }
 
-    public boolean hasWin() {
-        return win;
-    }
+    private boolean isColumnFull(int col) {
 
-    public void isWin() {
-        win = true;
+        int counter = 0;
+        boolean full = false;
+
+        for (int i = Board.rows - 1; i >= 0; i--) {
+            Tile tile = board[i][col - 1];
+
+            // check if position is occupied
+            if (!tile.isAvailable()) {
+                counter++;
+                if (counter == rows) {
+                    full = true;
+                    System.out.println("Chosen column is full, pick another\n");
+                }
+            }
+        }
+        return full;
     }
 
     public void placeToken(Player player) {
 
         // get move from player and check if valid
         Move move = player.getMove();
-        if (move.isValidMove()) {
+        if (move.isValidMove() && move.isMoveInBounds()) {
 
             // get position
             int col = move.getColumn();
+            if (!isColumnFull(col)) {
 
-            // get player token
-            String playerToken = player.getToken();
+                // get player token
+                String playerToken = player.getToken();
 
-            for (int i = Board.rows - 1; i >= 0; i--) {
+                for (int i = Board.rows - 1; i >= 0; i--) {
 
-                Tile tile = board[i][col - 1];
+                    Tile tile = board[i][col - 1];
 
-                // check if position is occupied
-                if (!tile.isAvailable()) {
+                    // check if position is occupied
+                    if (!tile.isAvailable()) {
 
-                } else {
-                    tile.setToken(playerToken);
-                    tile.setToOccupied();
+                    } else {
+                        tile.setToken(playerToken);
+                        tile.setToOccupied();
 
-                    // put tile on board
-                    board[i][col - 1] = tile;
-                    break;
+                        // put tile on board
+                        board[i][col - 1] = tile;
+                        break;
+                    }
                 }
             }
         }
-
     }
 
 }
