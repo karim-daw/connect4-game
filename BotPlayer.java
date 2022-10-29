@@ -43,8 +43,6 @@ public class BotPlayer implements Player {
     // Function for the computer to play
     private int getRandomColumn() {
 
-        board.setAvailableColumns();
-
         // get available columns
         ArrayList<Integer> availableColumns = board.getAvailableColumns();
 

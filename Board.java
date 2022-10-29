@@ -6,7 +6,6 @@ public class Board {
     private static int rows;
     private static int columns;
     private boolean win = false;
-    private static ArrayList<Integer> availableColumns;
 
     public Board(int rows, int columns) {
         Board.rows = rows;
@@ -25,11 +24,6 @@ public class Board {
 
     public Tile[][] getBoard() {
         return board;
-    }
-
-    public ArrayList<Integer> getAvailableColumns() {
-        System.out.println(availableColumns);
-        return availableColumns;
     }
 
     public boolean hasWin() {
@@ -100,15 +94,16 @@ public class Board {
         return isfull;
     }
 
-    public void setAvailableColumns() {
+    public ArrayList<Integer> getAvailableColumns() {
 
-        availableColumns = new ArrayList<Integer>();
+        ArrayList<Integer> availableColumns = new ArrayList<Integer>();
 
         for (int col = columns; col > 0; col--) {
             if (!isColumnFull(col)) {
                 availableColumns.add(col);
             }
         }
+        return availableColumns;
 
     }
 
