@@ -8,10 +8,15 @@ public class HumanPlayer implements Player {
     public HumanPlayer(String token, String name) {
         this.token = token;
         this.name = name;
+
+        // add to player count and arrayList
+        GameLogic.addPlayerCount();
+        GameLogic.addPlayerToPlayerList(this);
     }
 
     public Move getMove() {
         int colNumber = new InputReader().getNumberInput();
+
         Move move = new Move(colNumber);
         this.currentMove = move;
         return move;

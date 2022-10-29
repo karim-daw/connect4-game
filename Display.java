@@ -9,16 +9,24 @@ public class Display {
     }
 
     public static void displayStartMessage() {
-        System.out.println("\nWelcome to Connect 4");
-        System.out.println("There are 2 players red and yellow");
-        System.out.println("Player 1 is Red, Player 2 is Yellow");
-        System.out.println("To play the game type in the number of the column you want to drop you counter in");
-        System.out.println("A player wins by connecting 4 counters in a row - vertically, horizontally or diagonally");
+        System.out.println("\nWelcome to Connect " + Win.getWinNumber());
+        System.out.println("There are " + GameLogic.getPlayerCount() + " players");
+        displayPlayers();
+        System.out.println("To play, type in the column number you want to drop a tile in");
+        System.out.println("A player wins by connecting " + Win.getWinNumber()
+                + " tiles in a row");
+        System.out.println("Vertically, horizontally or diagonally");
         System.out.println("");
     }
 
     public static void displayWinner(Player player) {
         String str = "\nCongrations! " + player.getName() + " [" + player.getPrintableToken() + "]" + " wins!\n";
+        System.out.println(str);
+        System.out.println("");
+    }
+
+    public static void displayDraw() {
+        String str = "Well poop... its a draw";
         System.out.println(str);
         System.out.println("");
     }
@@ -36,6 +44,27 @@ public class Display {
 
     public static void displayColumnFullWarning(int column) {
         System.out.println("\nColumn " + column + " is full, pick another\n");
+    }
+
+    public static void displayBotMove(Player player, int column) {
+        System.out.println("\n" + "the bot: " + player.getName() + " chose column: " + column + "\n");
+    }
+
+    public static void displayHumanMove(Player player, int column) {
+        System.out.println("\n" + "You chose column: " + column + "\n");
+    }
+
+    public static void displayPlayers() {
+        String s = "";
+        for (Player player : GameLogic.getPlayers()) {
+            s += player.getName();
+            s += " has the token -> ";
+            s += player.getToken();
+            System.out.println(s);
+            s = "";
+        }
+        s += "\n";
+
     }
 
 }

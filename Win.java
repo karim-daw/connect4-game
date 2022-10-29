@@ -28,6 +28,10 @@ public class Win {
         return win;
     }
 
+    public static int getWinNumber() {
+        return winNumber;
+    }
+
     public boolean isHorizontalWin(String token, Tile[][] board) {
 
         int count = 0;

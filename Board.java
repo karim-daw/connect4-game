@@ -6,6 +6,7 @@ public class Board {
     private static int rows;
     private static int columns;
     private boolean win = false;
+    private boolean draw = false;
 
     public Board(int rows, int columns) {
         Board.rows = rows;
@@ -32,6 +33,17 @@ public class Board {
 
     public void isWin() {
         win = true;
+    }
+
+    public boolean hasDraw() {
+        return draw;
+    }
+
+    public boolean isDraw() {
+        if (getAvailableColumns().size() == 0) {
+            draw = true;
+        }
+        return draw;
     }
 
     public String getPrintableBoard() {
@@ -87,7 +99,7 @@ public class Board {
                 counter++;
                 if (counter == rows) {
                     isfull = true;
-                    Display.displayColumnFullWarning(col);
+
                 }
             }
         }
@@ -99,12 +111,11 @@ public class Board {
         ArrayList<Integer> availableColumns = new ArrayList<Integer>();
 
         for (int col = columns; col > 0; col--) {
-            if (!isColumnFull(col)) {
+            if (!Move.TESTisColumnFull(col, board)) {
                 availableColumns.add(col);
             }
         }
         return availableColumns;
-
     }
 
     public void placeToken(Player player) {
@@ -116,7 +127,7 @@ public class Board {
         int col = move.getColumn();
 
         if (move.isValidMove() && move.isMoveInBounds()) {
-            if (!isColumnFull(col)) {
+            if (!Move.TESTisColumnFull(col, board)) {
 
                 // get player token
                 String playerToken = player.getToken();
@@ -137,6 +148,8 @@ public class Board {
                         break;
                     }
                 }
+            } else if (Move.TESTisColumnFull(col, board) && player instanceof HumanPlayer) {
+                Display.displayColumnFullWarning(col);
             }
         } else if (!move.isValidMove()) {
             Display.displayInValidMoveWarning();

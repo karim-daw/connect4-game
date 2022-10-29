@@ -15,11 +15,16 @@ public class BotPlayer implements Player {
         this.board = board;
         rand = new Random();
 
+        // add to player count
+        GameLogic.addPlayerCount();
+        GameLogic.addPlayerToPlayerList(this);
     }
 
     public Move getMove() {
         int colNumber = getRandomColumn();
-        return new Move(colNumber);
+        Move move = new Move(colNumber);
+        this.currentMove = move;
+        return move;
     }
 
     public Move getCurrentMove() {
@@ -54,8 +59,7 @@ public class BotPlayer implements Player {
         // get a random choice of column
         int random = rand.nextInt(availableColumns.size());
         int chosenColumn = availableColumns.get(random);
-
-        System.out.println("\n" + "the computer chose column: " + chosenColumn + "\n");
+        Display.displayBotMove(this, chosenColumn);
 
         return chosenColumn;
 
