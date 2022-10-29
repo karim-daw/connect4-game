@@ -2,8 +2,10 @@
 public class Win {
 
     private boolean hasWon = false;
+    private static int winNumber;
 
-    public Win() {
+    public Win(int winNumber) {
+        Win.winNumber = winNumber;
     }
 
     public boolean checkWin(String token, Tile[][] board) {
@@ -37,7 +39,7 @@ public class Win {
                 if (board[i][j].getToken() == token) {
                     count = count + 1;
 
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -59,7 +61,7 @@ public class Win {
                 if (board[j][i].getToken() == token) {
                     count = count + 1;
 
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -75,10 +77,10 @@ public class Win {
         int count = 0;
         for (int i = 0; i < board.length; i++) {
             count = 0;
-            for (int j = i, k = 0; j < board.length && k < board[0].length; j++, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = i, delta = 0; j < board.length && delta < board[0].length; j++, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -94,10 +96,10 @@ public class Win {
         int count = 0;
         for (int i = 1; i < board.length; i++) {
             count = 0;
-            for (int j = 0, k = i; j < board.length && k < board[0].length; j++, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = 0, delta = i; j < board.length && delta < board[0].length; j++, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -113,10 +115,10 @@ public class Win {
         int count = 0;
         for (int i = 0; i < board[0].length; i++) {
             count = 0;
-            for (int j = board.length - 1, k = i; j >= 0 && k < board[0].length; j--, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = board.length - 1, delta = i; j >= 0 && delta < board[0].length; j--, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -132,10 +134,10 @@ public class Win {
         int count = 0;
         for (int i = board.length - 2; i >= 0; i--) {
             count = 0;
-            for (int j = i, k = 0; j >= 0 && k < board[0].length; j--, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = i, delta = 0; j >= 0 && delta < board[0].length; j--, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {

@@ -6,7 +6,6 @@ public class Board {
     private static int rows;
     private static int columns;
     private boolean win = false;
-    private static ArrayList<Integer> availableColumns;
 
     public Board(int rows, int columns) {
         Board.rows = rows;
@@ -25,11 +24,6 @@ public class Board {
 
     public Tile[][] getBoard() {
         return board;
-    }
-
-    public ArrayList<Integer> getAvailableColumns() {
-        System.out.println(availableColumns);
-        return availableColumns;
     }
 
     public boolean hasWin() {
@@ -93,22 +87,23 @@ public class Board {
                 counter++;
                 if (counter == rows) {
                     isfull = true;
-                    System.out.println("Chosen column is full, pick another\n");
+                    Display.displayColumnFullWarning(col);
                 }
             }
         }
         return isfull;
     }
 
-    public void setAvailableColumns() {
+    public ArrayList<Integer> getAvailableColumns() {
 
-        availableColumns = new ArrayList<Integer>();
+        ArrayList<Integer> availableColumns = new ArrayList<Integer>();
 
         for (int col = columns; col > 0; col--) {
             if (!isColumnFull(col)) {
                 availableColumns.add(col);
             }
         }
+        return availableColumns;
 
     }
 
@@ -116,10 +111,11 @@ public class Board {
 
         // get move from player and check if valid
         Move move = player.getMove();
-        if (move.isValidMove() && move.isMoveInBounds()) {
 
-            // get position
-            int col = move.getColumn();
+        // get position
+        int col = move.getColumn();
+
+        if (move.isValidMove() && move.isMoveInBounds()) {
             if (!isColumnFull(col)) {
 
                 // get player token
@@ -142,6 +138,10 @@ public class Board {
                     }
                 }
             }
+        } else if (!move.isValidMove()) {
+            Display.displayInValidMoveWarning();
+        } else if (!move.isMoveInBounds()) {
+            Display.displayMoveOutOfBoundsWarning(col);
         }
     }
 

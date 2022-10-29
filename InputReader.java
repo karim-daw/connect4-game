@@ -35,8 +35,6 @@ public class InputReader {
         try {
             numberInput = Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
-            System.out.println("cannot enter non-integer number");
-            System.out.println(e);
             numberInput = -1;
         }
     }

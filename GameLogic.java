@@ -4,7 +4,7 @@ public class GameLogic {
     Player player1;
     Player player2;
     Player currentPlayer;
-    Win win = new Win();
+    Win win = new Win(3);
 
     public GameLogic() {
         board = new Board(6, 7);
@@ -49,7 +49,10 @@ public class GameLogic {
     }
 
     public void changePlayer() {
-        if (currentPlayer.equals(player1)) {
+
+        if (currentPlayer.equals(player1) &&
+                currentPlayer.getCurrentMove().isValidMove() &&
+                currentPlayer.getCurrentMove().isMoveInBounds()) {
             currentPlayer = player2;
         } else {
             currentPlayer = player1;
