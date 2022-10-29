@@ -1,15 +1,15 @@
 public class GameLogic {
 
     private Board board;
-    HumanPlayer player1;
-    HumanPlayer player2;
-    HumanPlayer currentPlayer;
+    Player player1;
+    Player player2;
+    Player currentPlayer;
     Win win = new Win();
 
     public GameLogic() {
         board = new Board(6, 7);
         player1 = new HumanPlayer("| R ", "Player 1");
-        player2 = new HumanPlayer("| Y ", "Player 2");
+        player2 = new BotPlayer("| Y ", "Player 2", board);
     }
 
     // show board
@@ -30,12 +30,8 @@ public class GameLogic {
         // if game hasnt won
         while (!board.hasWin()) {
 
-            System.out.println("hi");
-
-            // get token from user
-
             // place token
-            currentPlayer.placeToken(board);
+            board.placeToken(currentPlayer);
 
             // show state of board
             Display.displayBoard(board);
@@ -48,7 +44,6 @@ public class GameLogic {
                 // change player
                 changePlayer();
             }
-
         }
 
     }

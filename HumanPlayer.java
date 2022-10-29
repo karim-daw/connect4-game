@@ -33,39 +33,4 @@ public class HumanPlayer implements Player {
         return printableToken;
     }
 
-    public void placeToken(Board board) {
-
-        // get move from player and check if valid
-        Move move = getMove();
-
-        if (move.isValidMove() && move.isMoveInBounds()) {
-
-            // get position
-            int col = getMove().getColumn();
-
-            if (!board.isColumnFull(col)) {
-
-                // get player token
-                String playerToken = getToken();
-
-                for (int i = Board.getRows() - 1; i >= 0; i--) {
-
-                    Tile tile = board.getBoard()[i][col - 1];
-
-                    // check if position is occupied
-                    if (!tile.isAvailable()) {
-
-                    } else {
-                        tile.setToken(playerToken);
-                        tile.setToOccupied();
-
-                        // put tile on board
-                        board.getBoard()[i][col - 1] = tile;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
 }

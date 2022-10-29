@@ -4,8 +4,8 @@ public interface Player {
 
     public String getToken();
 
-    public void placeToken(Board board);
-
     public String getPrintableToken();
+
+    public String getName();
 
 }

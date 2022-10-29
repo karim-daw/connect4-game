@@ -19,10 +19,12 @@ public class InputReader {
 
     private void getUserInput() {
         try {
-            do {
-                userInput = input.readLine();
+            userInput = input.readLine();
+            if (userInput == null) {
+                System.exit(0);
+            } else {
                 convertToInt();
-            } while (userInput == null);
+            }
 
         } catch (IOException e) {
             System.out.println(e);

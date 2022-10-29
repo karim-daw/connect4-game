@@ -1,16 +1,23 @@
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BotPlayer implements Player {
 
     private String token;
     private String name;
+    private Random rand;
+    private Board board;
 
-    public BotPlayer(String token, String name) {
+    public BotPlayer(String token, String name, Board board) {
         this.token = token;
         this.name = name;
+        this.board = board;
+        rand = new Random();
+
     }
 
     public Move getMove() {
-        int colNumber = new InputReader().getNumberInput();
+        int colNumber = getRandomColumn();
         return new Move(colNumber);
     }
 
@@ -33,36 +40,22 @@ public class BotPlayer implements Player {
         return printableToken;
     }
 
-    public void placeToken(Board board) {
+    // Function for the computer to play
+    private int getRandomColumn() {
 
-        // get move from player and check if valid
-        if (getMove().isValidMove() && getMove().isMoveInBounds()) {
+        board.setAvailableColumns();
 
-            // get position
-            int col = getMove().getColumn();
-            if (!board.isColumnFull(col)) {
+        // get available columns
+        ArrayList<Integer> availableColumns = board.getAvailableColumns();
 
-                // get player token
-                String playerToken = getToken();
+        // get a random choice of column
+        int random = rand.nextInt(availableColumns.size());
+        int chosenColumn = availableColumns.get(random);
 
-                for (int i = Board.getRows() - 1; i >= 0; i--) {
+        System.out.println("\n" + "the computer chose column: " + chosenColumn + "\n");
 
-                    Tile tile = board.getBoard()[i][col - 1];
+        return chosenColumn;
 
-                    // check if position is occupied
-                    if (!tile.isAvailable()) {
-
-                    } else {
-                        tile.setToken(playerToken);
-                        tile.setToOccupied();
-
-                        // put tile on board
-                        board.getBoard()[i][col - 1] = tile;
-                        break;
-                    }
-                }
-            }
-        }
     }
 
 }
