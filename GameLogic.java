@@ -4,7 +4,7 @@ public class GameLogic {
     Player player1;
     Player player2;
     Player currentPlayer;
-    Win win = new Win();
+    Win win = new Win(3);
 
     public GameLogic() {
         board = new Board(6, 7);
