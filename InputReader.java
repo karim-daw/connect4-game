@@ -17,10 +17,12 @@ public class InputReader {
         return numberInput;
     }
 
-    public void getUserInput() {
+    private void getUserInput() {
         try {
-            userInput = input.readLine();
-            convertToInt();
+            do {
+                userInput = input.readLine();
+                convertToInt();
+            } while (userInput == null);
 
         } catch (IOException e) {
             System.out.println(e);

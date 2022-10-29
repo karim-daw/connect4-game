@@ -72,12 +72,12 @@ public class Board {
         return footer;
     }
 
-    private boolean isColumnFull(int col) {
+    public boolean isColumnFull(int col) {
 
         int counter = 0;
         boolean full = false;
 
-        for (int i = Board.rows - 1; i >= 0; i--) {
+        for (int i = rows - 1; i >= 0; i--) {
             Tile tile = board[i][col - 1];
 
             // check if position is occupied
@@ -92,37 +92,37 @@ public class Board {
         return full;
     }
 
-    public void placeToken(Player player) {
+    // public void placeToken(HumanPlayer player) {
 
-        // get move from player and check if valid
-        Move move = player.getMove();
-        if (move.isValidMove() && move.isMoveInBounds()) {
+    // // get move from player and check if valid
+    // Move move = player.getMove();
+    // if (move.isValidMove() && move.isMoveInBounds()) {
 
-            // get position
-            int col = move.getColumn();
-            if (!isColumnFull(col)) {
+    // // get position
+    // int col = move.getColumn();
+    // if (!isColumnFull(col)) {
 
-                // get player token
-                String playerToken = player.getToken();
+    // // get player token
+    // String playerToken = player.getToken();
 
-                for (int i = Board.rows - 1; i >= 0; i--) {
+    // for (int i = Board.rows - 1; i >= 0; i--) {
 
-                    Tile tile = board[i][col - 1];
+    // Tile tile = board[i][col - 1];
 
-                    // check if position is occupied
-                    if (!tile.isAvailable()) {
+    // // check if position is occupied
+    // if (!tile.isAvailable()) {
 
-                    } else {
-                        tile.setToken(playerToken);
-                        tile.setToOccupied();
+    // } else {
+    // tile.setToken(playerToken);
+    // tile.setToOccupied();
 
-                        // put tile on board
-                        board[i][col - 1] = tile;
-                        break;
-                    }
-                }
-            }
-        }
-    }
+    // // put tile on board
+    // board[i][col - 1] = tile;
+    // break;
+    // }
+    // }
+    // }
+    // }
+    // }
 
 }

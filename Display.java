@@ -17,7 +17,7 @@ public class Display {
         System.out.println("");
     }
 
-    public static void displayWinner(Player player) {
+    public static void displayWinner(HumanPlayer player) {
         String str = "Congrations! " + player.getName() + " [" + player.getPrintableToken() + "]" + " wins!";
         System.out.println(str);
         System.out.println("");
