@@ -8,18 +8,19 @@ public class GameLogic {
     private Player player3;
     private Player currentPlayer;
     private Win win;
+
     private static int playerCount = 0;
     private static ArrayList<Player> players = new ArrayList<Player>();
 
-    public GameLogic(int winNumber) {
+    public GameLogic() {
         board = new Board(8, 7);
-        // TODO error checking to make sure board is big enough for winNumber
-        // TODO winning number neeeds to be a command line argument
 
         player1 = new HumanPlayer("| R ", "Player 1");
         player2 = new BotPlayer("| Y ", "Player 2", board);
         player3 = new BotPlayer("| G ", "Player 3", board);
-        win = new Win(winNumber);
+
+        // init Win to get winning numbere
+        win = new Win();
 
         // show welcome message
         Display.displayStartMessage();
@@ -50,7 +51,11 @@ public class GameLogic {
             } else if (board.isDraw()) {
                 Display.displayDraw();
                 // check if human tried column that is full
-            } else if (checkIsColumnFull()) {
+            } else if (currentPlayer.getCurrentMove().isValidMove() &&
+                    currentPlayer.getCurrentMove().isMoveInBounds() &&
+                    checkIsColumnFull()) {
+                // do nothing and back
+                ;
                 // otherwise change player
             } else {
                 changePlayer();

@@ -23,6 +23,14 @@ public class Board {
         return columns;
     }
 
+    public static int getSmallestBoardDimension() {
+        if (Board.rows < Board.columns) {
+            return Board.rows;
+        } else {
+            return Board.columns;
+        }
+    }
+
     public Tile[][] getBoard() {
         return board;
     }
@@ -85,26 +93,6 @@ public class Board {
         footer += halfSpace;
         return footer;
     }
-
-    // public boolean isColumnFull(int col) {
-
-    // int counter = 0;
-    // boolean isfull = false;
-
-    // for (int i = rows - 1; i >= 0; i--) {
-    // Tile tile = board[i][col - 1];
-
-    // // check if position is occupied
-    // if (!tile.isAvailable()) {
-    // counter++;
-    // if (counter == rows) {
-    // isfull = true;
-
-    // }
-    // }
-    // }
-    // return isfull;
-    // }
 
     public ArrayList<Integer> getAvailableColumns() {
 

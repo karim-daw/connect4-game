@@ -9,7 +9,7 @@ public class Display {
     }
 
     public static void displayStartMessage() {
-        System.out.println("\nWelcome to Connect " + Win.getWinNumber());
+        System.out.println("\nWelcome again! this time to Connect " + Win.getWinNumber());
         System.out.println("There are " + GameLogic.getPlayerCount() + " players");
         displayPlayers();
         System.out.println("To play, type in the column number you want to drop a tile in");
@@ -52,6 +52,10 @@ public class Display {
 
     public static void displayHumanMove(Player player, int column) {
         System.out.println("\n" + "You chose column: " + column + "\n");
+    }
+
+    public static void displayWelcomeMessage() {
+        System.out.println("\n Welcome to ConnectN!, input the winner number...\n");
     }
 
     public static void displayPlayers() {
