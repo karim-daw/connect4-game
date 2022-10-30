@@ -1,18 +1,13 @@
+public interface Player {
 
-public class Player {
+    public Move getMove();
 
-    private String token;
+    public Move getCurrentMove();
 
-    public Player(String token) {
-        this.token = token;
-    }
+    public String getToken();
 
-    public Move getMove() {
-        int colNumber = new InputReader().getNumberInput();
-        return new Move(colNumber);
-    }
+    public String getPrintableToken();
 
-    public String getToken() {
-        return token;
-    }
+    public String getName();
+
 }

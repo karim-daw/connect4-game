@@ -1,15 +1,29 @@
+import java.util.ArrayList;
+
 public class GameLogic {
 
     private Board board;
-    Player player1;
-    Player player2;
-    Player currentPlayer;
-    Win win = new Win();
+    private Player player1;
+    private Player player2;
+    private Player player3;
+    private Player currentPlayer;
+    private Win win;
+
+    private static int playerCount = 0;
+    private static ArrayList<Player> players = new ArrayList<Player>();
 
     public GameLogic() {
-        board = new Board(6, 7);
-        player1 = new Player("| R ");
-        player2 = new Player("| B ");
+        board = new Board(8, 7);
+
+        player1 = new HumanPlayer("| R ", "Player 1");
+        player2 = new BotPlayer("| Y ", "Player 2", board);
+        player3 = new BotPlayer("| G ", "Player 3", board);
+
+        // init Win to get winning numbere
+        win = new Win();
+
+        // show welcome message
+        Display.displayStartMessage();
     }
 
     public void playGame() {
@@ -21,7 +35,7 @@ public class GameLogic {
         currentPlayer = player1;
 
         // if game hasnt won
-        while (!board.hasWin()) {
+        while (!board.hasWin() && !board.hasDraw()) {
 
             // place token
             board.placeToken(currentPlayer);
@@ -32,21 +46,62 @@ public class GameLogic {
             // check if there is a winner
             if (win.checkWin(currentPlayer.getToken(), board.getBoard())) {
                 board.isWin();
+                Display.displayWinner(currentPlayer);
+                // check if there is a draw
+            } else if (board.isDraw()) {
+                Display.displayDraw();
+                // check if human tried column that is full
+            } else if (currentPlayer.getCurrentMove().isValidMove() &&
+                    currentPlayer.getCurrentMove().isMoveInBounds() &&
+                    checkIsColumnFull()) {
+                // do nothing and back
+                ;
+                // otherwise change player
             } else {
-                // change player
                 changePlayer();
             }
-
         }
-
     }
 
     public void changePlayer() {
-        if (currentPlayer.equals(player1)) {
+
+        if (currentPlayer.equals(player1) &&
+                currentPlayer.getCurrentMove().isValidMove() &&
+                currentPlayer.getCurrentMove().isMoveInBounds()) {
             currentPlayer = player2;
-        } else {
+        } else if (currentPlayer.equals(player2) &&
+                currentPlayer.getCurrentMove().isValidMove() &&
+                currentPlayer.getCurrentMove().isMoveInBounds()) {
+            currentPlayer = player3;
+        } else if (currentPlayer.equals(player3) &&
+                currentPlayer.getCurrentMove().isValidMove() &&
+                currentPlayer.getCurrentMove().isMoveInBounds()) {
             currentPlayer = player1;
+        } else {
+            //
         }
+    }
+
+    public boolean checkIsColumnFull() {
+        Move currentMove = currentPlayer.getCurrentMove();
+        int currentCol = currentMove.getColumn();
+        return Move.isColumnFull(currentCol, board.getBoard()); // returns true is full
+    }
+
+    public static ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public static void addPlayerToPlayerList(Player player) {
+        GameLogic.players.add(player);
+    }
+
+    public static int getPlayerCount() {
+        return playerCount;
+    }
+
+    public static void addPlayerCount() {
+        GameLogic.playerCount++;
     }
 
 }

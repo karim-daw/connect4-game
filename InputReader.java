@@ -17,10 +17,14 @@ public class InputReader {
         return numberInput;
     }
 
-    public void getUserInput() {
+    private void getUserInput() {
         try {
             userInput = input.readLine();
-            convertToInt();
+            if (userInput == null) {
+                System.exit(0);
+            } else {
+                convertToInt();
+            }
 
         } catch (IOException e) {
             System.out.println(e);
@@ -31,8 +35,6 @@ public class InputReader {
         try {
             numberInput = Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
-            System.out.println("cannot enter non-integer number");
-            System.out.println(e);
             numberInput = -1;
         }
     }

@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+
 public class Board {
 
     private Tile[][] board;
     private static int rows;
     private static int columns;
     private boolean win = false;
+    private boolean draw = false;
 
     public Board(int rows, int columns) {
         Board.rows = rows;
@@ -20,8 +23,35 @@ public class Board {
         return columns;
     }
 
+    public static int getSmallestBoardDimension() {
+        if (Board.rows < Board.columns) {
+            return Board.rows;
+        } else {
+            return Board.columns;
+        }
+    }
+
     public Tile[][] getBoard() {
         return board;
+    }
+
+    public boolean hasWin() {
+        return win;
+    }
+
+    public void isWin() {
+        win = true;
+    }
+
+    public boolean hasDraw() {
+        return draw;
+    }
+
+    public boolean isDraw() {
+        if (getAvailableColumns().size() == 0) {
+            draw = true;
+        }
+        return draw;
     }
 
     public String getPrintableBoard() {
@@ -64,44 +94,56 @@ public class Board {
         return footer;
     }
 
-    public boolean hasWin() {
-        return win;
-    }
+    public ArrayList<Integer> getAvailableColumns() {
 
-    public void isWin() {
-        win = true;
+        ArrayList<Integer> availableColumns = new ArrayList<Integer>();
+
+        for (int col = columns; col > 0; col--) {
+            if (!Move.isColumnFull(col, board)) {
+                availableColumns.add(col);
+            }
+        }
+        return availableColumns;
     }
 
     public void placeToken(Player player) {
 
         // get move from player and check if valid
         Move move = player.getMove();
-        if (move.isValidMove()) {
 
-            // get position
-            int col = move.getColumn();
+        // get position
+        int col = move.getColumn();
 
-            // get player token
-            String playerToken = player.getToken();
+        if (move.isValidMove() && move.isMoveInBounds()) {
+            if (!Move.isColumnFull(col, board)) {
 
-            for (int i = Board.rows - 1; i >= 0; i--) {
+                // get player token
+                String playerToken = player.getToken();
 
-                Tile tile = board[i][col - 1];
+                for (int i = Board.rows - 1; i >= 0; i--) {
 
-                // check if position is occupied
-                if (!tile.isAvailable()) {
+                    Tile tile = board[i][col - 1];
 
-                } else {
-                    tile.setToken(playerToken);
-                    tile.setToOccupied();
+                    // check if position is occupied
+                    if (!tile.isAvailable()) {
 
-                    // put tile on board
-                    board[i][col - 1] = tile;
-                    break;
+                    } else {
+                        tile.setToken(playerToken);
+                        tile.setToOccupied();
+
+                        // put tile on board
+                        board[i][col - 1] = tile;
+                        break;
+                    }
                 }
+            } else if (Move.isColumnFull(col, board) && player instanceof HumanPlayer) {
+                Display.displayColumnFullWarning(col);
             }
+        } else if (!move.isValidMove()) {
+            Display.displayInValidMoveWarning();
+        } else if (!move.isMoveInBounds()) {
+            Display.displayMoveOutOfBoundsWarning(col);
         }
-
     }
 
 }

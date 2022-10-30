@@ -2,8 +2,18 @@
 public class Win {
 
     private boolean hasWon = false;
+    private static int winNumber;
 
     public Win() {
+
+        // get winner number from user
+        try {
+            getUserWinNumber();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Setting winning number to 4");
+            Win.winNumber = 4;
+        }
     }
 
     public boolean checkWin(String token, Tile[][] board) {
@@ -26,24 +36,39 @@ public class Win {
         return win;
     }
 
+    public static void getUserWinNumber() throws Exception {
+        Display.displayWelcomeMessage();
+        int winNumber = new InputReader().getNumberInput();
+        if (winNumber <= Board.getSmallestBoardDimension() && winNumber >= 2)
+            Win.winNumber = winNumber;
+        else {
+            throw new Exception("Win number is either smaller than 2 or too large for Board Dimnesions");
+        }
+    }
+
+    public static int getWinNumber() {
+        return winNumber;
+    }
+
     public boolean isHorizontalWin(String token, Tile[][] board) {
 
         int count = 0;
 
         // check horizontal
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < Board.getRows(); i++) {
             for (int j = 0; j < board[i].length; j++) {
 
                 if (board[i][j].getToken() == token) {
                     count = count + 1;
 
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
                     count = 0;
                 }
             }
+            count = 0;
         }
         return hasWon;
     }
@@ -53,19 +78,20 @@ public class Win {
         int count = 0;
 
         // check vertical
-        for (int i = 0; i < board[0].length; i++) {
-            for (int j = 0; j < board.length; j++) {
+        for (int i = 0; i < Board.getColumns(); i++) {
+            for (int j = 0; j < Board.getRows(); j++) {
 
                 if (board[j][i].getToken() == token) {
                     count = count + 1;
 
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
                     count = 0;
                 }
             }
+            count = 0;
         }
         return hasWon;
     }
@@ -73,12 +99,12 @@ public class Win {
     public boolean isDiagonalDownRightBottomWin(String token, Tile[][] board) {
 
         int count = 0;
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < Board.getRows(); i++) {
             count = 0;
-            for (int j = i, k = 0; j < board.length && k < board[0].length; j++, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = i, delta = 0; j < Board.getRows() && delta < Board.getColumns(); j++, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -92,12 +118,12 @@ public class Win {
     public boolean isDiagonalDownRightTopWin(String token, Tile[][] board) {
 
         int count = 0;
-        for (int i = 1; i < board.length; i++) {
+        for (int i = 1; i < Board.getRows(); i++) {
             count = 0;
-            for (int j = 0, k = i; j < board.length && k < board[0].length; j++, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = 0, delta = i; j < Board.getRows() && delta < Board.getColumns(); j++, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -111,12 +137,12 @@ public class Win {
     public boolean isDiagonalUpRightBottomWin(String token, Tile[][] board) {
 
         int count = 0;
-        for (int i = 0; i < board[0].length; i++) {
+        for (int i = 0; i < Board.getColumns(); i++) {
             count = 0;
-            for (int j = board.length - 1, k = i; j >= 0 && k < board[0].length; j--, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = Board.getRows() - 1, delta = i; j >= 0 && delta < Board.getColumns(); j--, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
@@ -130,12 +156,12 @@ public class Win {
     public boolean isDiagonalUpRightTopWin(String token, Tile[][] board) {
 
         int count = 0;
-        for (int i = board.length - 2; i >= 0; i--) {
+        for (int i = Board.getRows() - 2; i >= 0; i--) {
             count = 0;
-            for (int j = i, k = 0; j >= 0 && k < board[0].length; j--, k++) {
-                if (board[j][k].getToken() == token) {
+            for (int j = i, delta = 0; j >= 0 && delta < Board.getColumns(); j--, delta++) {
+                if (board[j][delta].getToken() == token) {
                     count = count + 1;
-                    if (count >= 4) {
+                    if (count >= winNumber) {
                         hasWon = true;
                     }
                 } else {
