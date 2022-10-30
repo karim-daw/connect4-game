@@ -78,7 +78,7 @@ public class GameLogic {
                 currentPlayer.getCurrentMove().isMoveInBounds()) {
             currentPlayer = player1;
         } else {
-            //
+            // do nothing
         }
     }
 
