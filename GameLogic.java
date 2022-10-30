@@ -7,7 +7,6 @@ public class GameLogic {
     private Board board;
     private Player player1;
     private Player player2;
-    private Player player3;
     private Player currentPlayer;
     private Win win;
 
@@ -17,11 +16,10 @@ public class GameLogic {
     // Constructor
 
     public GameLogic() {
-        board = new Board(8, 7);
+        board = new Board(6, 7);
 
         player1 = new HumanPlayer("| R ", "Player 1");
         player2 = new BotPlayer("| Y ", "Player 2", board);
-        player3 = new BotPlayer("| G ", "Player 3", board);
 
         // init Win to get winning numbere
         win = new Win();
@@ -83,15 +81,8 @@ public class GameLogic {
                 currentPlayer.getCurrentMove().isValidMove() &&
                 currentPlayer.getCurrentMove().isMoveInBounds()) {
             currentPlayer = player2;
-        } else if (currentPlayer.equals(player2) &&
-                currentPlayer.getCurrentMove().isValidMove() &&
-                currentPlayer.getCurrentMove().isMoveInBounds()) {
-            currentPlayer = player3;
-        } else if (currentPlayer.equals(player3) &&
-                currentPlayer.getCurrentMove().isValidMove() &&
-                currentPlayer.getCurrentMove().isMoveInBounds()) {
-            currentPlayer = player1;
         } else {
+            currentPlayer = player1;
             // do nothing
         }
     }
