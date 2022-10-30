@@ -4,19 +4,34 @@ import java.io.InputStreamReader;
 
 public class InputReader {
 
+    // Fields
+
     private BufferedReader input;
     private String userInput;
     private int numberInput;
+
+    // Constructor
 
     public InputReader() {
         input = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    // Methods
+
+    /**
+     * getter that returns integer from user input
+     * 
+     * @return numberInput
+     */
     public int getNumberInput() {
         getUserInput();
         return numberInput;
     }
 
+    /**
+     * Gets the user input from the buffered reader
+     * converts to converts to integer
+     */
     private void getUserInput() {
         try {
             userInput = input.readLine();
@@ -31,6 +46,9 @@ public class InputReader {
         }
     }
 
+    /**
+     * Parse input from buffered reader to integer value
+     */
     private void convertToInt() {
         try {
             numberInput = Integer.parseInt(userInput);
