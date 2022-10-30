@@ -86,32 +86,32 @@ public class Board {
         return footer;
     }
 
-    public boolean isColumnFull(int col) {
+    // public boolean isColumnFull(int col) {
 
-        int counter = 0;
-        boolean isfull = false;
+    // int counter = 0;
+    // boolean isfull = false;
 
-        for (int i = rows - 1; i >= 0; i--) {
-            Tile tile = board[i][col - 1];
+    // for (int i = rows - 1; i >= 0; i--) {
+    // Tile tile = board[i][col - 1];
 
-            // check if position is occupied
-            if (!tile.isAvailable()) {
-                counter++;
-                if (counter == rows) {
-                    isfull = true;
+    // // check if position is occupied
+    // if (!tile.isAvailable()) {
+    // counter++;
+    // if (counter == rows) {
+    // isfull = true;
 
-                }
-            }
-        }
-        return isfull;
-    }
+    // }
+    // }
+    // }
+    // return isfull;
+    // }
 
     public ArrayList<Integer> getAvailableColumns() {
 
         ArrayList<Integer> availableColumns = new ArrayList<Integer>();
 
         for (int col = columns; col > 0; col--) {
-            if (!Move.TESTisColumnFull(col, board)) {
+            if (!Move.isColumnFull(col, board)) {
                 availableColumns.add(col);
             }
         }
@@ -127,7 +127,7 @@ public class Board {
         int col = move.getColumn();
 
         if (move.isValidMove() && move.isMoveInBounds()) {
-            if (!Move.TESTisColumnFull(col, board)) {
+            if (!Move.isColumnFull(col, board)) {
 
                 // get player token
                 String playerToken = player.getToken();
@@ -148,7 +148,7 @@ public class Board {
                         break;
                     }
                 }
-            } else if (Move.TESTisColumnFull(col, board) && player instanceof HumanPlayer) {
+            } else if (Move.isColumnFull(col, board) && player instanceof HumanPlayer) {
                 Display.displayColumnFullWarning(col);
             }
         } else if (!move.isValidMove()) {

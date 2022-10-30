@@ -26,8 +26,7 @@ public class Move {
         }
     }
 
-    // TODO maybe put checkCOlumn is full here
-    public static boolean TESTisColumnFull(int col, Tile[][] board) {
+    public static boolean isColumnFull(int col, Tile[][] board) {
 
         int counter = 0;
         boolean isfull = false;
@@ -40,7 +39,6 @@ public class Move {
                 counter++;
                 if (counter == Board.getRows()) {
                     isfull = true;
-
                 }
             }
         }

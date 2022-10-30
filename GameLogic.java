@@ -12,8 +12,9 @@ public class GameLogic {
     private static ArrayList<Player> players = new ArrayList<Player>();
 
     public GameLogic(int winNumber) {
-        board = new Board(6, 7);
+        board = new Board(8, 7);
         // TODO error checking to make sure board is big enough for winNumber
+        // TODO winning number neeeds to be a command line argument
 
         player1 = new HumanPlayer("| R ", "Player 1");
         player2 = new BotPlayer("| Y ", "Player 2", board);
@@ -48,16 +49,13 @@ public class GameLogic {
                 // check if there is a draw
             } else if (board.isDraw()) {
                 Display.displayDraw();
-            } else if (Move.TESTisColumnFull(currentPlayer.getCurrentMove().getColumn(), board.getBoard())) {
-                //
-
+                // check if human tried column that is full
+            } else if (checkIsColumnFull()) {
                 // otherwise change player
             } else {
                 changePlayer();
             }
-
         }
-
     }
 
     public void changePlayer() {
@@ -77,6 +75,12 @@ public class GameLogic {
         } else {
             //
         }
+    }
+
+    public boolean checkIsColumnFull() {
+        Move currentMove = currentPlayer.getCurrentMove();
+        int currentCol = currentMove.getColumn();
+        return Move.isColumnFull(currentCol, board.getBoard()); // returns true is full
     }
 
     public static ArrayList<Player> getPlayers() {
