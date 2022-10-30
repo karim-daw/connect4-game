@@ -1,8 +1,12 @@
 
 public class Win {
 
+    // Fields
+
     private boolean hasWon = false;
     private static int winNumber;
+
+    // Constructor
 
     public Win() {
 
@@ -16,6 +20,8 @@ public class Win {
             Win.winNumber = 4;
         }
     }
+
+    // Methods
 
     /**
      * wrapper function that checks if any winning condition is met

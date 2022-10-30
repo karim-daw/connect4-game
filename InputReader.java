@@ -4,13 +4,19 @@ import java.io.InputStreamReader;
 
 public class InputReader {
 
+    // Fields
+
     private BufferedReader input;
     private String userInput;
     private int numberInput;
 
+    // Constructor
+
     public InputReader() {
         input = new BufferedReader(new InputStreamReader(System.in));
     }
+
+    // Methods
 
     /**
      * getter that returns integer from user input

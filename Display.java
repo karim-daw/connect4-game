@@ -1,8 +1,12 @@
 public class Display {
 
+    // Constructor
+
     public Display() {
         // do nothing
     }
+
+    // Methods
 
     public static void displayBoard(Board board) {
         System.out.println(board.getPrintableBoard());
@@ -58,6 +62,7 @@ public class Display {
         System.out.println("\n Welcome to ConnectN!, input the winner number...\n");
     }
 
+    // loops through players and prints player info one by one
     public static void displayPlayers() {
         String s = "";
         for (Player player : GameLogic.getPlayers()) {

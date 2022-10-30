@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class GameLogic {
 
+    // Fields
+
     private Board board;
     private Player player1;
     private Player player2;
@@ -11,6 +13,8 @@ public class GameLogic {
 
     private static int playerCount = 0;
     private static ArrayList<Player> players = new ArrayList<Player>();
+
+    // Constructor
 
     public GameLogic() {
         board = new Board(8, 7);
@@ -26,6 +30,11 @@ public class GameLogic {
         Display.displayStartMessage();
     }
 
+    // Methods
+
+    /**
+     * main gameplay sequence
+     */
     public void playGame() {
 
         // show starting board
@@ -54,7 +63,7 @@ public class GameLogic {
             } else if (currentPlayer.getCurrentMove().isValidMove() &&
                     currentPlayer.getCurrentMove().isMoveInBounds() &&
                     checkIsColumnFull()) {
-                // do nothing and back
+                // do nothing and go back
                 ;
                 // otherwise change player
             } else {
@@ -63,6 +72,11 @@ public class GameLogic {
         }
     }
 
+    /**
+     * method that automatically changes currentPlayer at the end of each round
+     * if all moves were valid and in bounds
+     * else the current player stays the same and goes again
+     */
     public void changePlayer() {
 
         if (currentPlayer.equals(player1) &&
@@ -82,24 +96,33 @@ public class GameLogic {
         }
     }
 
-    public boolean checkIsColumnFull() {
+    /**
+     * wrapper method to check if current player chose a full column or not
+     * 
+     * @return boolean - whether column is full or not
+     */
+    private boolean checkIsColumnFull() {
         Move currentMove = currentPlayer.getCurrentMove();
         int currentCol = currentMove.getColumn();
-        return Move.isColumnFull(currentCol, board.getBoard()); // returns true is full
+        return Move.isColumnFull(currentCol, board.getBoard()); // returns true if full
     }
 
+    // get arrayList of players
     public static ArrayList<Player> getPlayers() {
         return players;
     }
 
+    // adds player to player list
     public static void addPlayerToPlayerList(Player player) {
         GameLogic.players.add(player);
     }
 
+    // get player count
     public static int getPlayerCount() {
         return playerCount;
     }
 
+    // increments player count
     public static void addPlayerCount() {
         GameLogic.playerCount++;
     }

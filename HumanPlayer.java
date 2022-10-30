@@ -1,9 +1,13 @@
 
 public class HumanPlayer implements Player {
 
+    // Fields
+
     private String token;
     private String name;
     Move currentMove;
+
+    // Constructor
 
     public HumanPlayer(String token, String name) {
         this.token = token;
@@ -13,6 +17,8 @@ public class HumanPlayer implements Player {
         GameLogic.addPlayerCount();
         GameLogic.addPlayerToPlayerList(this);
     }
+
+    // Methods
 
     /*
      * getter that consumes input from user

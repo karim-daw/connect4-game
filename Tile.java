@@ -36,11 +36,7 @@ public class Tile {
         return position;
     }
 
-    /**
-     * Gets the symbol of the tile
-     * 
-     * @return this.token
-     */
+    // get token
     public String getToken() {
         return this.token;
     }
@@ -58,6 +54,7 @@ public class Tile {
         }
     }
 
+    // sets the tile availability to false
     public void setToOccupied() {
         this.availabilty = false;
     }
