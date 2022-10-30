@@ -168,10 +168,9 @@ public class Board {
                     // get tile of board
                     Tile tile = board[i][col - 1];
 
-                    // check if position is occupied
-                    if (!tile.isAvailable()) {
+                    // check if tile is available
+                    if (tile.isAvailable()) {
 
-                    } else {
                         tile.setToken(playerToken);
                         tile.setToOccupied();
 
@@ -180,11 +179,15 @@ public class Board {
                         break;
                     }
                 }
+                // else if column is full and the player is a human, display a warning
+                // to the human indicating that they need to choose another column
             } else if (Move.isColumnFull(col, board) && player instanceof HumanPlayer) {
                 Display.displayColumnFullWarning(col);
             }
+            // if the move is not valid show invalid move warning
         } else if (!move.isValidMove()) {
             Display.displayInValidMoveWarning();
+            // if move is out of bounds show move out of bounds warning
         } else if (!move.isMoveInBounds()) {
             Display.displayMoveOutOfBoundsWarning(col);
         }
