@@ -139,17 +139,22 @@ public class Win {
      * below
      * there will be variations of the "pivot" or "starting" point but the basic
      * logic is still the same, two nested forloops with three variables
-     * i,j,delta, where j and delta increment and i is the pivot or start point
+     * i,j,delta,
+     * i is the pivot or start or the diagonal check
+     * and j increments or decrements depending on the direction (up or down)
+     * and delta increments
+     * 
      * 
      * the algo;
-     * start counter from inside loop to use row as pivot point
+     * start counter from inside loop to use row (i) as pivot point
      * loop through rows and columns
      * check if index is between row and col bounds
-     * while i is contant in the nested loop i.e:
-     * init delta variable (substituting row index) that
-     * increments and j (column index) also increments
-     * or decrements depending is its checking diagonals
-     * going up (decrements j) or down (increments j)
+     * while i is constant in the nested loop e.g.:
+     * if i is currently i = 0
+     * init delta variable (which is substituting column index)
+     * int j variable which starts at the pivot value i
+     * j (substitubg row index) increments or decrements depending which diagonals:
+     * either going up (decrements j) or down (increments j)
      * 
      * loop through rows
      * start counter
