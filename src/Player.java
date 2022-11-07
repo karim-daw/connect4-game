@@ -1,3 +1,5 @@
+package src;
+
 public interface Player {
 
     // get move of player from userinput in command line
